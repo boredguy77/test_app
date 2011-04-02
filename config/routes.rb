@@ -1,4 +1,22 @@
 Cramcards::Application.routes.draw do
+  resources :cards
+
+  resources :decks
+
+  resources :accounts
+  
+  resources :accounts do
+
+	resources :decks do
+
+		resources :cards
+		
+	end
+	
+  end
+		
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
