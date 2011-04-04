@@ -1,19 +1,29 @@
 Cramcards::Application.routes.draw do
-  resources :cards
+resources :cards
 
-  resources :decks
+resources :decks
 
-  resources :accounts
-  
-  resources :accounts do
+resources :accounts
+
+resources :accounts do
 
 	resources :decks do
 
 		resources :cards
-		
+
 	end
+
+end
+
+resources :decks do
+
+	resources :cards
 	
-  end
+end
+	
+
+  
+  
 		
 
 

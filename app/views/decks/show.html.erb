@@ -15,6 +15,26 @@
   <%= @deck.description %>
 </p>
 
+<h3>Cards in this deck</h3>
+<%@cards.each do |card|%>
+	<p>Card : <%=link_to card.fronttext + " " + card.backtext, edit_card_path(card)%></p>
+<%end%>
+
+<h3>Add Cards</h3>
+<%= form_for([@deck, @deck.cards.build]) do |f| %>
+  <div class="field">
+    <%= f.label :fronttext %><br />
+    <%= f.text_area :fronttext %>
+  </div>
+  <div class="field">
+    <%= f.label :backtext %><br />
+    <%= f.text_area :backtext %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Edit', edit_deck_path(@deck) %> |
 <%= link_to 'Back', decks_path %>

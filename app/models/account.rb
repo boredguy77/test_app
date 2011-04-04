@@ -1,3 +1,5 @@
 class Account < ActiveRecord::Base
-has_many :decks
+	validates :username, :presence => true, :uniqueness => true
+	validates :password, :presence => true
+	has_many :decks
 end

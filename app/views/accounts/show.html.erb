@@ -19,6 +19,25 @@
   <b>Lastname:</b>
   <%= @account.lastname %>
 </p>
+<h3>Decks</h3>
+<% @decks.each do |deck| %>
+	<p>Deck :<%= link_to deck.name, deck_path(deck)%></p>
+<%end%>
+
+<h2>Add a Deck</h2>
+<%= form_for([@account, @account.decks.build]) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 
 <%= link_to 'Edit', edit_account_path(@account) %> |

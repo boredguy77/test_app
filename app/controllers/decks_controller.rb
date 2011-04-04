@@ -14,11 +14,9 @@ class DecksController < ApplicationController
   # GET /decks/1.xml
   def show
     @deck = Deck.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @deck }
-    end
+	@cards = @deck.cards
+	#@account = Account.find(params[:account_id])
+	#@account = params
   end
 
   # GET /decks/new
@@ -40,17 +38,11 @@ class DecksController < ApplicationController
   # POST /decks
   # POST /decks.xml
   def create
-    @deck = Deck.new(params[:deck])
-
-    respond_to do |format|
-      if @deck.save
-        format.html { redirect_to(@deck, :notice => 'Deck was successfully created.') }
-        format.xml  { render :xml => @deck, :status => :created, :location => @deck }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @deck.errors, :status => :unprocessable_entity }
-      end
-    end
+	@account = Account.find(params[:account_id])
+	
+    @deck = @account.decks.create(params[:deck])
+	redirect_to account_path(@account)
+    
   end
 
   # PUT /decks/1

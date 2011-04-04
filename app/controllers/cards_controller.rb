@@ -40,17 +40,9 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.xml
   def create
-    @card = Card.new(params[:card])
-
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to(@card, :notice => 'Card was successfully created.') }
-        format.xml  { render :xml => @card, :status => :created, :location => @card }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @card.errors, :status => :unprocessable_entity }
-      end
-    end
+	@deck = Deck.find(params[:deck_id])
+    @card = @deck.cards.create(params[:card])
+	redirect_to deck_path(@deck)
   end
 
   # PUT /cards/1

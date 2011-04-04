@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
-  before_filter :authenticate, :except => [:index, :show]
+  before_filter :authenticate, :except => [:show, :new]
   
   def authenticate
     authenticate_or_request_with_http_basic do |user_name, password|
@@ -22,6 +22,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = Account.find(params[:id])
+	@decks = @account.decks
 
     respond_to do |format|
       format.html # show.html.erb
